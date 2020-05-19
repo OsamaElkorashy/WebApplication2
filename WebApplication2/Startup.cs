@@ -25,11 +25,20 @@ namespace WebApplication2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerGen(s=>{
+                s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Test Doc", Version = "v1" });
+                s.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Test Doc 2", Version = "v2" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI(s=> {
+                s.SwaggerEndpoint("/swagger/v2/swagger.json", "V2");
+                s.SwaggerEndpoint("/swagger/v1/swagger.json", "V1");
+            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
