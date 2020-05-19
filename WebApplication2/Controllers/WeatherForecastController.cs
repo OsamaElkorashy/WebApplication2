@@ -31,7 +31,7 @@ namespace WebApplication2.Controllers
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Greetings = "Hiiiii" ,
+                Greetings = "Hello from the other side" ,
                 Summary = Summaries[rng.Next(Summaries.Length)],
 
             })
